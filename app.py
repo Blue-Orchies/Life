@@ -3,11 +3,9 @@
 """
 @Time : 2022/4/10
 @Author : ysji
-@File : app001
-@Description : pthon001练习题
+@File : app
+@Description : pthon练习题
 """
-
-# python001
 
 # 1.进制转换
 v1 = 675
@@ -32,6 +30,7 @@ print(int(v3, 2))
 # 2.布尔值True、False。
 # False：0, 空类型， None
 # True："武沛齐"
+# 456、666、345
 if "":
     print(123)
 else:
