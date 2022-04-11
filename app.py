@@ -2,7 +2,7 @@
 
 """
 @Time : 2022/4/10
-@Author : ysji
+@Author : user
 @File : app
 @Description : pthon练习题
 """
