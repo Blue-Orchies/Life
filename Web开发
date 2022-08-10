@@ -1,1 +1,180 @@
 Web开发
+
+一、发展史
+1989年圣诞节 =》 Guido von Rossum 开始编写Python语言的编译器
+1991年2月 =》 第一个Python编译器诞生
+1994年1月 =》 Python 1.0 正式发布
+2000年10月16日 =》 Python 2.0 正式发布
+2008年12月3日 =》 Python 3.0 正式发布
+
+二、优点
+1.语法优美，易上手
+2.被广泛应用于数据分析和机器学习领域
+3.可移植性高，可以工作于不同的操作系统
+4.支持面向对象编程和函数式编程
+5.代码严谨，可读性强
+
+三、缺点
+1.执行效率低
+2.代码无法加密
+3.开发框架多
+
+四、应用领域
+Web开发、云计算、DevOps、爬虫、自动化测试、数据分析、机器学习等领域。
+
+五、安装Python解释器
+Win10：Python官网（python.org） => Python-3.9.0
+版本检测：
+python sys.py
+import sys
+print(sys.version)
+
+六、第一行代码
+hello.py
+"""
+第一个Python程序 - hello，world！
+向伟大的Dennis M. Ritchie先生致敬
+
+Version：0.1
+Author: 季延升
+"""
+print("hello，world")
+# print("你好，世界！")
+
+七、python开发工具
+IDLE - 自带的集成开发工具
+IPython - 更好的交互式编程工具
+Sublime Text - 高级文本编辑器
+Visual Studio Code - 微软的开发工具
+Pycharm - Python开发神器
+
+八、Python开发（兴趣是最好的老师）
+1.Python之禅
+import this 
+2.trutle绘制国旗
+import turtle
+
+
+def draw_rectangle(x, y, width, height):
+    """绘制矩形"""
+    turtle.goto(x, y)
+    turtle.pencolor('red')
+    turtle.fillcolor('red')
+    turtle.begin_fill()
+    for i in range(2):
+        turtle.forward(width)
+        turtle.left(90)
+        turtle.forward(height)
+        turtle.left(90)
+    turtle.end_fill()
+
+
+def draw_star(x, y, radius):
+    """绘制五角星"""
+    turtle.setpos(x, y)
+    pos1 = turtle.pos()
+    turtle.circle(-radius, 72)
+    pos2 = turtle.pos()
+    turtle.circle(-radius, 72)
+    pos3 = turtle.pos()
+    turtle.circle(-radius, 72)
+    pos4 = turtle.pos()
+    turtle.circle(-radius, 72)
+    pos5 = turtle.pos()
+    turtle.color('yellow', 'yellow')
+    turtle.begin_fill()
+    turtle.goto(pos3)
+    turtle.goto(pos1)
+    turtle.goto(pos4)
+    turtle.goto(pos2)
+    turtle.goto(pos5)
+    turtle.end_fill()
+
+
+def main():
+    """主程序"""
+    turtle.speed(12)
+    turtle.penup()
+    x, y = -270, -180
+    # 画国旗主体
+    width, height = 540, 360
+    draw_rectangle(x, y, width, height)
+    # 画大星星
+    pice = 22
+    center_x, center_y = x + 5 * pice, y + height - pice * 5
+    turtle.goto(center_x, center_y)
+    turtle.left(90)
+    turtle.forward(pice * 3)
+    turtle.right(90)
+    draw_star(turtle.xcor(), turtle.ycor(), pice * 3)
+    x_poses, y_poses = [10, 12, 12, 10], [2, 4, 7, 9]
+    # 画小星星
+    for x_pos, y_pos in zip(x_poses, y_poses):
+        turtle.goto(x + x_pos * pice, y + height - y_pos * pice)
+        turtle.left(turtle.towards(center_x, center_y) - turtle.heading())
+        turtle.forward(pice)
+        turtle.right(90)
+        draw_star(turtle.xcor(), turtle.ycor(), pice)
+    # 隐藏海龟
+    turtle.ht()
+    # 显示绘图窗口
+    turtle.mainloop()
+
+
+if __name__ == '__main__':
+    main()
+
+九、Python语法
+计算机的组成：运算器、控制器、存储器、输入设备、输出设备。
+冯诺依曼体系：一是指出要将存储设备与中央处理器分开，二是提出了将数据以二进制方式编码。
+二进制：在物理器件上面来说是很容器实现的（高压电表示1，低压电表示0.）
+进制转换：二进制、十进制、八进制、十六进制
+变量：在程序设计中，变量是一种存储数据的载体
+数据：数值、文本、图形、音频、视频等各种各样的数据
+常用的几种数据类型：整形、浮点型、字符串类型、布尔型、复数型
+变量：计算机中的变量是实际存在的数据或者说是存储器中存储数据的一块内存空间，变量的值可以被读取和修改，这是所有计算和控制的基础。
+对于每个变量我们需要给它取一个名字，就如同我们每个人都有属于自己的响亮的名字一样。
+在python中，变量命名需要遵循以下这些必须遵守硬性规则和强烈建议遵守的非硬性规则
+硬性规则：
+变量名由字母、数字、下划线构成，数字不能开头
+大小写敏感
+不要跟关键词和系统保留字冲突。
+PEP 8 要求：
+用小写字母拼写，多个单词用下划线连接。
+受保护的实例属性用单个下划线开头
+私有的实例属性用两个下划线开头
+
+变量的练习：
+"""
+使用变量保存数据并进行加减乘除运算
+
+Version: 0.1
+Author: 季延升
+"""
+a = 321
+b = 12
+print(a + b)    # 333
+print(a - b)    # 309
+print(a * b)    # 3852
+print(a / b)    # 26.75
+
+检查变量类型
+"""
+使用type()检查变量的类型
+
+Version: 0.1
+Author: 季延升
+"""
+a = 100
+b = 12.345
+c = 1 + 5j
+d = 'hello, world'
+e = True
+print(type(a))    # <class 'int'>
+print(type(b))    # <class 'float'>
+print(type(c))    # <class 'complex'>
+print(type(d))    # <class 'str'>
+print(type(e))    # <class 'bool'>
+
+变量类型转换
+int(): 将一个数值或字符串转换成整数，可以指定进制。
