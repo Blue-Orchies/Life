@@ -286,4 +286,33 @@ file_object.close()
 print(data)
 
 注意事项：文件打开操作需要注意当前读取的是'相对路径'，还是'绝对路径'。
+绝对路径：绝对路径是指文件在硬盘上真正存在的路径。
+相对路径：相对于自己的目标文件位置。
+两者区别：
+1.绝对路径是一个文件实际存在于硬盘中的路径。
+2.相对路径，指的是与自身的目标档案相关的位置。
+3.绝对路径是指可以从这个路径上查找文件夹，不管是从外部或内部存取。而相对路径则是与它本身相关的，其它地方的档案和路径，则只能在内部存取。
+
+读取全路径(转义)：
+file_object = open(r"C:\new\info.txt", mode='rt', encoding='utf-8')
+data = file_object.read()
+file_object.close()
+
+读不到文件的时候会报错，可以添加判断判断路径是否存在。
+import os
+
+file_path = ""C:\new\info.txt"
+exists = os.path.exists(file_path)
+if exists:
+    file_object = open(r"C:\new\info.txt", mode='rt', encoding='utf-8')
+    data = file_object.read()
+    file_object.close()
+    print(data)
+else:
+    print("不存在")
+
+写文件
+
+
+
 
