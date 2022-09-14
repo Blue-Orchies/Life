@@ -1,5 +1,7 @@
 Web开发
 
+第一模块：Python基础
+
 一、发展史
 1989年圣诞节 =》 Guido von Rossum 开始编写Python语言的编译器
 1991年2月 =》 第一个Python编译器诞生
@@ -183,4 +185,105 @@ str()：将指定的对象转换成字符串形式，可以指定编码。
 chr()：将整数转换成该编码对应的字符串（一个字符）。
 ord()：将字符串（一个字符）转换成对应的编码（整数）。
 
+
+第二模块：模块和函数
+
+Python的程序由包、模块和函数组成。
+函数是一段可重用的有名称的代码。通过输入的参数值，返回需要的结果，并可存储在文件中供以后使用。几乎任何Python代码都可放在函数中。Python为函数提供了强大支持。
+模块是处理某一类问题的集合，模块由函数和类组成。模块和常规Python程序之间的唯一区别是用途不同：模块用于编写其他程序。因此，模块通常没有main函数。
+包是一个完成特定任务的工具箱，Python提供了许多有用的工具包，如字符串处理、图形用户接口、Web应用、图像处理等。使用自带的工具包，可以提高程序开发效率、减少编程复杂度，达到代码重用的效果。
+
+自定以send_email函数
+def send_email():
+    pass
+    
+加入功能代码块
+定义一个goods列表,里面标明name和price对应的数据。
+goods = [
+    {"name": "电脑", "price": 1999},
+    {"name": "鼠标", "price": 10},
+    {"name": "游艇", "price": 20},
+    {"name": "美女", "price": 998}
+]
+
+循环获取列表里面的数据，提取索引，提取字典里面的键 ，提取字典里面的值。
+for index in range(len(goods)):
+    item = goods[index]
+    print(index + 1, item['name'], item['price'])
+
+调用函数send_email()
+send_email()
+
+循环获取输入值
+while True:
+    num = input("请输入要选择的商品序号(Q/q)：")
+    if num.upper() == "Q":
+        break
+    if not num.isdecimal():
+        print("用输入的格式错误")
+        break
+    num = int(num)
+    send_email()
+    if num > 4 or num < 0:
+        print("范围选择错误")
+        break
+    target_index = num - 1
+    choice_item = goods[target_index]
+    print(choice_item["name"],choice_item['price'])
+    send_email()
+
+内置函数：len、bin、oct、hex
+name = "你好呀"
+
+data = len(name)
+print(data)
+
+内置模块：random
+import random
+
+num = random.randint(1, 10)
+print(num)
+
+data_list = [11, 22, 33, 44, 55]
+data = random.choice(data_list)
+print(data)
+
+第三方模块：处理Excel
+
+文件操作（字符串文本可读，字节类型可存储。）
+name = "小白"
+
+字符串转换字节
+data = name.encode('utf-8')
+print(data)
+
+字节转换字符串
+data = data.decode('utf-8')
+print(data)
+
+读字节类型文件操作步骤（图片、视频）
+1.打开文件（以字节的方式）
+file_object = open("info.txt", mode='rb')
+2.读取文件内容，并赋值给data。
+data = file_object.read()
+3.关闭文件
+file_object.close()
+4.打印内容
+print(data)
+5.扩展可转回字符串
+text = data.decode('utf-8')
+6.打印字符串
+print(text)
+
+读字符串文件操作步骤
+1.打开文件（以字符串的方式）
+file_object = open("info.txt", mode='rt', encoding='utf-8')
+2.读取文件内容，并赋值给data。
+data = file_object.read()
+3.关闭文件
+file_object.close()
+4.打印内容
+print(data)
+
+注意事项：文件打开操作需要注意当前读取的是'相对路径'，还是'绝对路径'。
 
