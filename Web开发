@@ -312,6 +312,156 @@ else:
     print("不存在")
 
 写文件
+##### 写二进制文件
+
+`file_object = open('t1.txt', mode='wb')
+file_object.write("你好".encode("utf-8"))
+file_object.close()`
+
+
+
+##### 写文本文件
+
+`file_object = open('t1.txt', mode='wt', encoding='utf-8')
+file_object.wirte('你好')
+file_object.close()`
+
+
+
+##### 复制文件
+
+`f1 = open('a1.png', mode='wb')
+content = f1.read()
+f1.close()`
+
+`f2 = open('a2.png', mode='wb')
+f2.write(content)
+f2.close()`
+
+
+
+##### 用户注册
+
+`user = input("请输入用户名：")
+pwd = input("请输入密码：")
+data = "{}-{}".format(user, pwd)
+file_object = open("files/info.txt", mode='wt', encoding='utf-8')
+file_object.write(data)
+file_object.close()`
+
+
+
+##### 多用户注册
+
+`file_object = open("files/info.txt", mode='wb', encoding='utf-8')
+while True:
+    user = input("请输入用户名：")
+    if user.upper() == Q:
+        break
+    pwd = input("请输入密码：")
+    data = "{}-{}\n".format(user, pwd)
+    file_object.write(data)
+file_object.close()`
+
+
+
+##### 去网上下载一点文本，文本信息写入文件
+
+`import requests
+res = requests.get(url="请求网址", header={"User-Agent": "模拟浏览器信息"})
+file_object = open('file/log1.txt', mode='wb')
+file_object.write(res.content)
+file_object.close()`
+
+
+
+##### 去网上下载一张图片，图片写入本地文件
+
+`import requests
+res = requests.get(url="请求网址", headers={"User-Agent": "模拟浏览器信息"})
+file_object = open("files/美女.png", mode="wb")
+file_object.write(res.content)
+file_object.close()`
+
+
+
+##### 文件打开模式
+
+
+| 模式 | 代码         | 规则                                     |
+| ---- | ------------ | ---------------------------------------- |
+| 只读 | r、rt、rb    | 存在，读<br>不存在，创建再写             |
+| 只写 | w、wt、wb    | 存在，清空在写<br />不存在，创建再写     |
+| 只写 | x、xt、xb    | 存在，报错<br />不存在，创建再写         |
+| 只写 | a、at、ab    | 存在，尾部追加。<br />不存在，创建再写。 |
+| 读写 | r+、rb+      | 默认光标位置：起始位置                   |
+| 读写 | w+、wb+      | 默认光标位置：起始位置（清空文件）       |
+| 读写 | x+、xb+      | 默认光标位置：起始位置（新文件）         |
+| 读写 | a+、at+、ab+ | 默认光标位置：末尾                       |
+
+```
+# r+、rt+、rb+，默认光标位置：起始位置
+# roote-123
+file_object = open('info.txt', mode='rt+')
+data = file_object.read() # roote-123
+print(data)
+file_object.write('你好') # roote-123你好
+file_object.close()
+
+# roote-123
+file_object = open('info.txt', mode='rt+')
+file_object.write("hello") # hello-123
+data = file_object.read()  # -123
+print(data)
+file_object.close()
+
+# w+、wt+、wb+（清空文件）
+file_object = open('info.txt', mode='wt+')
+
+# 读取内容
+data = file_object.read()
+print(data)
+
+# 写入内容
+file_object.write('你好')
+
+# 将光标位置重置起始
+file_object.seek(0)
+
+# 读取内容
+data = file_object.read()
+print(data)
+
+file_object.close()
+
+# x+、xt+、xb+，默认光标位置：起始位置（新文件）
+# a+、at+、ab+，默认光标位置：末尾
+file_object = open('info.txt', mode='at+')
+
+# 写入内容 hello你好
+file_object.write('你好')
+
+# 将光标位置重置起始
+file_object.seek(0)
+
+# 读取内容 hello你好
+data = file_object.read()
+print(data)
+
+file_object.close()
+
+# 多用户注册
+file_object = open('file/account.txt', mode='a')
+while True:
+    user = input("用户：")
+    if user.upper() == "Q":
+        break
+    pwd = input("密码：")
+    data = "{}-{}\n".format(user, pwd)
+    file_object.write(data)
+file_object.close()
+```
+
 
 
 
