@@ -462,6 +462,127 @@ while True:
 file_object.close()
 ```
 
+# 常见功能：读
+# read, 读所有
+f = open('info.txt', mode='r')
+data = f.read()
+f.close()
+
+f = open('info.txt', mode='rb')
+data = f.read()
+f.close()
+
+f = open('info.txt', mode='r')
+# 读一个字节
+data = f.read(1)
+f.close()
+
+f = open('info.txt', mode='rb')
+#读1个字节
+data = f.read(1)
+f.close()
+
+# readline, 读一行
+f = open('info.txt', mode='rb')
+# 读第1行
+first_line = f.readline()
+print(first_line)
+
+# 读第2行
+second_line = f.readline()
+print(second_line)
+
+f.close()
+
+# readlines, 读所有行，每行作为列表的一个元素
+f = open('info.txt', mode='rb')
+data_list = f.readlines()
+f.close()
+print(data_list)
+
+# 循环，读大文件（readline加强版）
+f = open('info.txt', mode='rb')
+for line in f:
+    print(line)
+f.close()
+
+# 常见功能：写
+# write, 写
+# 写入字符
+f = open('info.txt', mode='a', encoding='utf-8')
+f.write("你好")
+f.close()
+
+# 写入字节
+f = open('info.txt', mode='ab')
+f.write("你好".encode("utf-8"))
+f.close()
+
+# flush, 刷到硬盘
+f = open('info.txt', mode='a', encoding='utf-8')
+while True:
+    # 不是写到了硬盘，而是写在缓冲区，系统会将缓冲区的内容刷到硬盘。
+    f.write("你好")
+    # 刷到硬盘
+    f.flush()
+f.close()
+
+# 多用户注册案例
+file_object = open('file/account.txt', mode='a')
+
+while True:
+    user = input("用户名：")
+    if user.upper() == "Q":
+        break
+    pwd = input("密码：")
+    data = "{}-{}\n".format(user,pwd)
+    file_object.write(data)
+    file_object.flush()
+
+file_object.close()
+
+# 移动光标位置（字节）
+f = open('info.txt', mode='r+',encoding='utf-8')
+# 移动光标位置，在次光标之后开始写内容（如有原内容，则会覆盖）
+f.seek(3) # 2 会出现问题，可以通过f.tell()获取光标来避免。
+f.write("你好呀")
+f.close()
+
+# 注意：在a模式下，调用write在文件内写入内容时，永远只能将内容写入到尾部，不会写到光标的位置。
+f = open('info.txt', mode='a+',encoding='utf-8')
+# 移动光标位置，在次光标之后开始写内容（如有原内容，则会覆盖）
+f.seek(3)
+f.write("你好呀")
+f.close()
+
+# 获取当前光标位置（ f.tell()永远获取的是字节 ）
+# 读取方式为字符，获取方式为字节。
+f = open('info.txt', mode='r', encoding='utf-8')
+f.read(3)
+f.read(1)
+position = f.tell()
+f.close()
+print(position) # 12
+
+# 读取方式为字节，获取方式为字节。
+f = open('info.txt', mode='rb')
+f.read(3)
+f.read(1)
+position = f.tell()
+f.close()
+print(position) # 4
+
+# 上下文管理
+# 之前对文件进行操作时，每次都要打开和关闭文件，比较繁琐且容易忘记关闭文件。
+# 以后再进行文件操作时，推荐大家使用with上下文管理，它可以自动实现关闭文件。
+with open("xxxx.txt", mode='rb') as file_object:
+    data = file_object.read()
+    print(data)
+# 在python2.7后，with又支持同时对多个文件的上下文进行管理，即：
+with open("xxxx.txt", mode='rb') as f1, open("xxxx.txt", mode='rb') as f2:
+    pass
+
+
 
 
 
