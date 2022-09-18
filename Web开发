@@ -582,6 +582,540 @@ with open("xxxx.txt", mode='rb') as file_object:
 with open("xxxx.txt", mode='rb') as f1, open("xxxx.txt", mode='rb') as f2:
     pass
 
+# 文件操作例题
+1. 补充代码：实现下载视频并保存到本地
+import requests
+
+res = requests.get(
+    url="https://f.video.weibocdn.com/000pTZJLgx07IQgaH7HW010412066BJV0E030.mp4?label=mp4_720p&template=1280x720.25.0&trans_finger=1f0da16358befad33323e3a1b7f95fc9&media_id=4583105541898354&tp=8x8A3El:YTkl0eM8&us=0&ori=1&bf=2&ot=h&ps=3lckmu&uid=3ZoTIp&ab=3915-g1,966-g1,3370-g1,3601-g0,3601-g0,3601-g0,1493-g0,1192-g0,1191-g0,1258-g0&Expires=1608204895&ssig=NdYpDIEXSS&KID=unistore,video",
+    headers={
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+       }
+   )
+   
+# 视频的文件内容
+res.content
+
+with open('nba.mp4', mode='wb') as file_object:
+    file_object.write(res.content) 
+
+2. 日志分析，计算某用户`223.73.89.192`访问次数。日志文件如下：`access.log`
+49.89.167.91 - - [17/Dec/2020:03:43:50 +0800] "GET /wiki/detail/3/40 HTTP/1.1" 301 0 "-" "Mozilla/5.0(Linux;Android 5.1.1;OPPO A33 Build/LMY47V;wv) AppleWebKit/537.36(KHTML,link Gecko) Version/4.0 Chrome/43.0.2357.121 Mobile Safari/537.36 LieBaoFast/4.51.3" "-"
+49.89.167.91 - - [17/Dec/2020:03:44:11 +0800] "GET /wiki/detail/3/40/ HTTP/1.1" 200 8033 "-" "Mozilla/5.0(Linux;Android 5.1.1;OPPO A33 Build/LMY47V;wv) AppleWebKit/537.36(KHTML,link Gecko) Version/4.0 Chrome/43.0.2357.121 Mobile Safari/537.36 LieBaoFast/4.51.3" "-"
+203.208.60.66 - - [17/Dec/2020:03:47:58 +0800] "GET /media/uploads/2019/11/17/pic/s1.png HTTP/1.1" 200 710728 "-" "Googlebot-Image/1.0" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:26 +0800] "GET /wiki/detail/3/40/ HTTP/1.1" 200 8033 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:26 +0800] "GET /static/stark/plugins/font-awesome/css/font-awesome.css HTTP/1.1" 200 37414 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:26 +0800] "GET /static/stark/plugins/bootstrap/css/bootstrap.css HTTP/1.1" 200 146010 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:26 +0800] "GET /static/web/css/commons.css HTTP/1.1" 200 3674 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:26 +0800] "GET /static/mdeditor/editormd/css/editormd.preview.css HTTP/1.1" 200 60230 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:26 +0800] "GET /static/stark/js/jquery-3.3.1.min.js HTTP/1.1" 200 86927 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:26 +0800] "GET /static/stark/plugins/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 37045 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:26 +0800] "GET /static/mdeditor/editormd/lib/marked.min.js HTTP/1.1" 200 19608 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:27 +0800] "GET /static/mdeditor/editormd/lib/prettify.min.js HTTP/1.1" 200 17973 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:27 +0800] "GET /static/mdeditor/editormd/fonts/fontawesome-webfont.woff2?v=4.3.0 HTTP/1.1" 200 56780 "https://pythonav.com/static/mdeditor/editormd/css/editormd.preview.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:27 +0800] "GET /static/mdeditor/editormd/editormd.js HTTP/1.1" 200 163262 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:28 +0800] "GET /static/mdeditor/mdeditor-preview-init.js HTTP/1.1" 200 261 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:29 +0800] "GET /static/stark/plugins/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 200 77160 "https://pythonav.com/static/stark/plugins/font-awesome/css/font-awesome.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+223.73.89.192 - - [17/Dec/2020:03:48:29 +0800] "GET /media/uploads/2019/02/22/Gobook/_book/ssl2.png HTTP/1.1" 200 203535 "https://pythonav.com/wiki/detail/3/40/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.60" "-"
+
+total_count = 0
+ip = "223.73.89.192"
+with open('account.log', mode='r', encoding='utf-8') as file_object:
+    for line in file_object:
+        print(line)
+        if not line.startswith(ip):
+            continue
+        total_count += 1
+print(total_count)
+
+3. 日志分析升级，计算所有用户的访问次数。
+user_dict = {}
+with open('account.log', mode='r',encoding='utf-8') as file_object:
+    for line in file_object:
+        user_ip = line.split(" ")[0]
+        if user_ip in user_dict:
+            user_dict[user_ip] += 1
+        else:
+            user_dict[user_ip] = 1
+print(user_dict)
+
+4. 筛选出股票 当前价大于 20 的所有股票数据。
+股票代码,股票名称,当前价,涨跌额,涨跌幅,年初至今,成交量,成交额,换手率,市盈率(TTM),股息率,市值
+SH601778,N晶科,6.29,+1.92,+43.94%,+43.94%,259.66万,1625.52万,0.44%,22.32,-,173.95亿
+SH688566,吉贝尔,52.66,+6.96,+15.23%,+122.29%,1626.58万,8.09亿,42.29%,89.34,-,98.44亿
+SH688268,华特气体,88.80,+11.72,+15.20%,+102.51%,622.60万,5.13亿,22.87%,150.47,-,106.56亿
+SH600734,实达集团,2.60,+0.24,+10.17%,-61.71%,1340.27万,3391.14万,2.58%,亏损,0.00%,16.18亿
+SH900957,凌云B股,0.36,+0.033,+10.09%,-35.25%,119.15万,42.10万,0.65%,44.65,0.00%,1.26亿
+SZ000584,哈工智能,6.01,+0.55,+10.07%,-4.15%,2610.86万,1.53亿,4.36%,199.33,0.26%,36.86亿
+SH600599,熊猫金控,6.78,+0.62,+10.06%,-35.55%,599.64万,3900.23万,3.61%,亏损,0.00%,11.25亿
+SH600520,文一科技,8.21,+0.75,+10.05%,-24.05%,552.34万,4464.69万,3.49%,亏损,0.00%,13.01亿
+SH603682,锦和商业,11.73,+1.07,+10.04%,+48.29%,2746.63万,3.15亿,29.06%,29.62,-,55.42亿
+SZ300831,派瑞股份,12.27,+1.12,+10.04%,+208.29%,25.38万,311.41万,0.32%,60.59,-,39.26亿
+
+with open('stock.txt', mode='r',encoding='utf-8') as file_object:
+    # 1.跳过第一行
+    file_object.readline()
+    # 2.接着往下读
+    for line in file_object:
+        text = line.split(',')[2]
+        price = float(text)
+        if price > 20:
+            print(line.strip())
+
+5. 根据要求修改文件的内容，原文件内容如下：`ha.conf`
+请将文件中的 `luffycity`修改为 `pythonav` 。
+global       
+        log 127.0.0.1 local2
+        daemon
+        maxconn 256
+        log 127.0.0.1 local2 info
+defaults
+        log global
+        mode http
+        timeout connect 5000ms
+        timeout client 50000ms
+        timeout server 50000ms
+        option  dontlognull
+   
+listen stats :8888
+        stats enable
+        stats uri       /admin
+        stats auth      admin:1234
+   
+frontend oldboy.org
+        bind 0.0.0.0:80
+        option httplog
+        option httpclose
+        option  forwardfor
+        log global
+        acl www hdr_reg(host) -i www.luffycity.org
+        use_backend www.luffycity.com if www
+   
+backend www.luffycity.com
+        server 100.1.7.9 100.1.7.9 weight 20 maxconn 3000
+
+# 1. 文件督导内存，再通过replace（适用小文件，不适合大文件）
+# 2. 挨个位置读文件的内容，遇到luffycity将其替换成pythonav。（不可取)
+# 3. 同时打开两个文件，读 + 写。（适用于小文件，适用大文件）
+with open('ha.conf', mode='r',encoding='utf-8') as read_file_object,open('new.conf', mode='w',encoding='utf-8') as write_file_object:
+    for line in read_file_object:
+        new_line = line.replace("luffycity", 'pythonav')
+        write_file_object.write(new_line)
+
+import shutil
+shutil.move('new.conf', 'ha.conf')
+
+
+6. 下载文档中的所有图片且以用户名为图片名称存储。
+import requests
+import os
+with open('files/mv.csv', mode='r',encoding='utf-8') as file_object:
+    file_object.readline()
+    for line in file_object:
+        user_id, username, url = line.strip().split(',')
+        print(username, url)
+        # 1. 根据URL下载图片
+        res = requests.get(
+            url=url,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+            }
+        )
+        # 检查images目录是否存在？ 不存在，则创建images目录
+        if not os.path.exists("images"):
+            # 创建images目录
+            os.makedirs("images")
+        # 2. 将图片的内容写入到文件
+        with open("images/{}.png".format(username), mode='wb') as img_object:
+            img_object.write(res.content)
+
+# ini格式
+ini文件是initialization file的缩写，平时用于存储软件的配置文件。例如：mysql数据库的配置文件。
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+log-bin=py-mysql-bin
+character-set-server=utf8
+collation-server=utf8_general_ci
+log-error=/var/log/mysqld.log
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+
+[client]
+default-character-set=utf8
+
+import configparser
+
+config = configparser.ConfigParser()
+config.read('files/my.ini', encoding='utf-8')
+
+# 1.获取所有的节点
+result = config.sections()
+print(result)
+
+# 2.索取节点下的键值
+result = config.items("mysqld_safe")
+print(result)
+
+for key,value in config.items("mysqld_safe"):
+    print(key, value)
+
+# 3.获取某个节点下的键的对应的值
+result = config.get("mysqld","collation-server")
+result(result)
+
+# 4.是否存在节点
+v1 = config.has_section("client")
+print(v1)
+
+# 5.添加一个节点
+config.add_section("group")
+# 添加节点和键值
+config.set('group', 'name', 'woai')
+config.set('client','name', 'woai')
+config.write(open('files/new.ini', mode='w', encoding='utf-8'))
+
+# 删除
+# 删除节点
+config.remove_section('clinet')
+# 删除节点下的键值
+config.remove_option("mysqld", "datadir")
+config.write(open("file/new.ini", mode='w', encoding='utf-8'))
+
+# xml格式文件
+# 可扩展标记语言，是一种简单的数据存储语言，xml被设计用来传输和存储数据。
+# 存储，可用来存放配置文件，例如：java的配置文件
+# 传输，网络传输时以这种格式存在，例如,早期ajax传输的数据、soap协议等。
+# 在python开发中：微信支付、微信公众号消息处理 时会用到基于XML传输数据。
+# 例如：https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
+<data>
+    <country name="Liechtenstein">
+        <rank updated="yes">2</rank>
+        <year>2023</year>
+        <gdppc>141100</gdppc>
+        <neighbor direction="E" name="Austria" />
+        <neighbor direction="W" name="Switzerland" />
+    </country>
+    <country name="Singapore">
+        <rank updated="yes">5</rank>
+        <year>2026</year>
+        <gdppc>59900</gdppc>
+        <neighbor direction="N" name="Malaysia" />
+    </country>
+    <country name="Panama">
+        <rank updated="yes">69</rank>
+        <year>2026</year>
+        <gdppc>13600</gdppc>
+        <neighbor direction="W" name="Costa Rica" />
+        <neighbor direction="E" name="Colombia" />
+    </country>
+</data>
+
+# 读取文件和内容
+from xml.etree import ElementTree as ET
+
+# ET去打开xml文件
+tree = ET.parse("files/xo.xml")
+
+# 获取根标签
+root = tree.getroot()
+
+print(root)
+
+from xml.etree import ElementTree as ET
+content = """
+<data>
+    <country name="Liechtenstein">
+        <rank updated="yes">2</rank>
+        <year>2023</year>
+        <gdppc>141100</gdppc>
+        <neighbor direction="E" name="Austria" />
+        <neighbor direction="W" name="Switzerland" />
+    </country>
+    <country name="Singapore">
+        <rank updated="yes">5</rank>
+        <year>2026</year>
+        <gdppc>59900</gdppc>
+        <neighbor direction="N" name="Malaysia" />
+    </country>
+    <country name="Panama">
+        <rank updated="yes">69</rank>
+        <year>2026</year>
+        <gdppc>13600</gdppc>
+        <neighbor direction="W" name="Costa Rica" />
+        <neighbor direction="E" name="Colombia" />
+    </country>
+</data>
+"""
+
+root = ET.XML(content)
+print(root)
+
+# 循环获取data标签里面的子标签和属性
+for child in root:
+    # child.tag = conntry
+    # child.attrib = {"name", "Panama"}
+    print(child.tag, child.attrib)
+    for node in child:
+        print(node.tag, node.attrib, node.text)
+
+# find查找一个标签
+country_object = root.find("country")
+print(country_object.tag, country_object.attrib)
+gdppc_object = country_object.find("gdppc")
+print(gdppc_object.tag, gdppc_object.attrib, gdppc_object.text)
+
+# findall查找多个标签
+root = ET.XML(content)
+v1 = root.findall('country')
+print(v1)
+
+v2 = root.find('country').find('rank')
+print(v2.text)
+
+# 找所有的year标签（不分层级）
+for child in root.iter('year'):
+    print(child.tag, child.text)
+
+# 修改节点内容和属性
+rank = root.find('country').find('rank')
+print(rank.text)
+rank.text = "999"
+print(rank.text)
+rank.set('update', '2020-11-11')
+# 保存文件
+tree = ET.ElementTree(root)
+tree.write("new.xml", encoding="utf-8")
+
+# 删除节点
+root.remove( root.find('country') )
+# 保存文件
+tree = ET.ElementTree(root)
+tree.write("new.xml", encoding="utf-8")
+
+# 构建一个XML文档
+from xml.etree import ElementTree as ET
+
+# 创建根标签
+root = ET.Element("home")
+
+# 创建节点大儿子
+son1 = ET.Element('son', {'name': '儿1'})
+# 创建小儿子
+son2 = ET.Element('son', {"name": '儿2'})
+
+# 在大儿子中创建两个孙子
+grandson1 = ET.Element('grandson', {'name': '儿11'})
+grandson2 = ET.Element('grandson', {'name': '儿12'})
+son1.append(grandson1)
+son1.append(grandson2)
+
+# 把儿子添加到根节点中
+root.append(son1)
+root.append(son2)
+
+tree = ET.ElementTree(root)
+tree.write('oooo.xml', encoding='utf-8', short_empty_elements=False)
+<home>
+    <son name="儿1">
+        <grandson name="儿11"></grandson>
+        <grandson name="儿12"></grandson>
+    </son>
+    <son name="儿2"></son>
+</home>
+
+# 第二种方式构建XML
+from xml.etree import ElementTree as ET
+root = ET.Element("famliy")
+# 创建大儿子
+son1 = root.makeelement('son', {'name': '儿1'})
+# 创建小儿子
+son2 = root.makeelement('son', {"name": '儿2'})
+
+# 在大儿子中创建两个孙子
+grandson1 = son1.makeelement('grandson', {'name': '儿11'})
+grandson2 = son1.makeelement('grandson', {'name': '儿12'})
+
+son1.append(grandson1)
+son1.append(grandson2)
+
+
+# 把儿子添加到根节点中
+root.append(son1)
+root.append(son2)
+
+tree = ET.ElementTree(root)
+tree.write('oooo.xml',encoding='utf-8')
+
+<famliy>
+    <son name="儿1">
+        <grandson name="儿11"></grandson>
+        <grandson name="儿12"></grandson>
+    </son>
+    <son name="儿2"></son>
+</famliy>
+
+# 第三种构建方法
+from xml.etree import ElementTree as ET
+
+
+# 创建根节点
+root = ET.Element("famliy")
+
+
+# 创建节点大儿子
+son1 = ET.SubElement(root, "son", attrib={'name': '儿1'})
+# 创建小儿子
+son2 = ET.SubElement(root, "son", attrib={"name": "儿2"})
+
+# 在大儿子中创建一个孙子
+grandson1 = ET.SubElement(son1, "age", attrib={'name': '儿11'})
+grandson1.text = '孙子'
+
+
+et = ET.ElementTree(root)  #生成文档对象
+et.write("test.xml", encoding="utf-8")
+
+<famliy>
+	<son name="儿1">
+    	<age name="儿11">孙子</age>
+    </son>
+	<son name="儿2"></son>
+</famliy>
+
+# XML小视频信息格式
+<user>&lt;![CDATA[你好呀]]</user>
+
+from xml.etree import ElementTree as ET
+
+# 创建根节点
+root = ET.Element("user")
+root.text = "<![CDATA[你好呀]]"
+
+et = ET.ElementTree(root)  # 生成文档对象
+et.write("test.xml", encoding="utf-8")
+
+# 微信小程序数据处理
+content = """<xml>
+    <ToUserName><![CDATA[gh_7f083739789a]]></ToUserName>
+    <FromUserName><![CDATA[oia2TjuEGTNoeX76QEjQNrcURxG8]]></FromUserName>
+    <CreateTime>1395658920</CreateTime>
+    <MsgType><![CDATA[event]]></MsgType>
+    <Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+    <MsgID>200163836</MsgID>
+    <Status><![CDATA[success]]></Status>
+</xml>"""
+
+from xml.etree import ElementTree as ET
+
+info = {}
+root = ET.XML(content)
+for node in root:
+    print(node.tag, node.text)
+    info[node.tag] = node.text
+print(info)
+
+{'ToUserName': 'gh_7f083739789a', 
+'FromUserName': 'oia2TjuEGTNoeX76QEjQNrcURxG8', 
+'CreateTime': '1395658920', 
+'MsgType': 'event', 
+'Event': 'TEMPLATESENDJOBFINISH', 
+'MsgID': '200163836', 
+'Status': 'success'}
+
+# Excel格式文件
+Python内部未提供处理Excel文件的功能，想要在Python中操作Excel需要按照第三方的模块。
+此模块中集成了Python操作Excel的相关功能，接下来我们就需要去学习该模块提供的相关功能即可。
+pip3 install openpyxl
+
+from xml.dom.domreg import well_known_implementations
+from openpyxl import load_workbook
+
+wb = load_workbook("files/p1.xlsx")
+
+# sheet相关操作
+# sheet的读取
+# 1.获取excel文件中的所有sheet名称
+print(wb.sheetnames)
+
+# 2.选择sheet，基于sheet名称
+sheet = wb["数据导出"]
+
+cell = sheet.cell(1,1)
+print(cell.value)
+
+# 3.选择sheet,基于索引位置
+sheet = wb.worksheets[0]
+cell = sheet.cell(1,2)
+print(cell.value)
+
+# 4.循环所有sheet
+for name in wb.sheetnames:
+    sheet = wb[name]
+    cell = sheet.cell(1, 1)
+    print(cell.value)
+
+for sheet in wb.worksheets:
+    cell = sheet.cell(1, 1)
+    print(cell.value)
+for sheet in wb:
+    cell = sheet.cell(1, 1)
+    print(cell.value)
+
+# 读取sheet中的某个单元格信息
+from openpyxl import load_workbook
+  
+wb = load_workbook("files/p1.xlsx")
+sheet = wb.worksheets[0]
+  
+# 1.获取第N行第N列的单元格(位置是从1开始）
+
+cell = sheet.cell(1, 1)
+  
+print(cell.value)
+print(cell.style)
+print(cell.font)
+print(cell.alignment)
+
+# 2.获取某个单元格
+
+c1 = sheet["A2"]
+print(c1.value)
+  
+c2 = sheet['D4']
+print(c2.value)
+
+# 3.第N行所有的单元格
+for cell in sheet[1]:
+    print(cell.value)
+
+# 4.所有行的数据(获取某一列数据)
+for row in sheet.rows:
+    print(row[0].value, row[1].value)
+
+# 5.获取所有列的数据
+for col in sheet.columns:
+    print(col[1].value)
+
+# 读合并的单元格
+from openpyxl import load_workbook
+  
+wb = load_workbook("files/p1.xlsx")
+sheet = wb.worksheets[2]
+  
+# 获取第N行第N列的单元格(位置是从1开始）
+c1 = sheet.cell(1, 1)
+print(c1)  # <Cell 'Sheet1'.A1>
+print(c1.value) # 用户信息
+  
+c2 = sheet.cell(1, 2)
+print(c2)  # <MergedCell 'Sheet1'.B1>
+print(c2.value) # None
+
 
 
 
